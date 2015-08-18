@@ -1,5 +1,8 @@
 package com.javaPersonaltest;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class javaBasicTest {
 /**
  * 题目1：古典问题：有一对兔子，从出生后第3个月起每个月都生一对兔子，
@@ -57,6 +60,123 @@ public class javaBasicTest {
 		}
 	}
 
-  }  
+  }
 	
-}
+	/**
+	 * 求指定一个数是不是水仙花数
+	 */
+	public static void isLouts(int num){
+		/**
+		 * 首先要求键盘输入一个数然后分别获得 这个数的个位数，十位数，百位数
+		 * 分别求他们的立方求和
+		 */
+		//声明一个泛型数组
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		
+		//得到百位数
+		int theUnit = num/100;
+		System.out.println("百位数是:"+theUnit);
+		//获取十位数
+		int midTens = (num%100)/10;
+		System.out.println("十位数是:"+midTens);
+		//获取个位数
+		int unitsDigit = (num%100)%10;
+		System.out.println("个位数是:"+unitsDigit);
+		
+		int sumOfSquare = (int)Math.pow(theUnit, 3) + (int)Math.pow(midTens, 3) 
+		+ (int)Math.pow(unitsDigit, 3);
+		
+		if(sumOfSquare == num){
+			System.out.println("数字:"+num+"是水仙花数！");
+		}else{
+			System.out.println("Sorry！这不是一个水仙花数！");
+		}
+	}
+	/**
+	 * 测试指定一个三位数是不是水仙花数:求一个范围内的水仙花数
+	 */
+	public static void isLoutsTwo(int number){
+		/**
+		 * 首先要求键盘输入一个数然后分别获得 这个数的个位数，十位数，百位数
+		 * 分别求他们的立方求和
+		 */
+		//声明一个泛型数组
+		ArrayList<Integer> array = new ArrayList<Integer>();
+		//声明一个数组用于存储水仙花数
+		int [] arr = new int[100];//这种方式必须指定个数的数组局限性太强了
+		//每行输出5个数
+		int n = 0;
+		for(int num = number;num<1000;num++){
+			//得到百位数
+			int theUnit = num/100;
+//			System.out.println("百位数是:"+theUnit);
+			//获取十位数
+			int midTens = (num%100)/10;
+//			System.out.println("十位数是:"+midTens);
+			//获取个位数
+			int unitsDigit = (num%100)%10;
+//			System.out.println("个位数是:"+unitsDigit);
+			
+			int sumOfSquare = (int)Math.pow(theUnit, 3) + (int)Math.pow(midTens, 3) 
+			+ (int)Math.pow(unitsDigit, 3);
+			if(sumOfSquare == num){
+				array.add(sumOfSquare);
+				
+			}else{
+				continue;
+			}
+		  }
+		for(int j:array){
+			n++;
+			System.out.println(j+" ");
+			if(n%5 == 0){
+				System.out.println();
+			}
+		}
+		}
+	
+	/**
+	 * 将一个正整数分解质因数。例如：输入90,打印出90=2*3*3*5。 
+	 */
+	public static void splitData(int n){
+		System.out.println(n+"=");
+		for(int i = 2;i<n+1;i++){
+			while(n%i == 0 &&n != i){
+				n /= i;
+				System.out.print(i+" * ");
+			}
+			if(n==i){
+				System.out.println(i);
+				break;
+			}
+		}
+	}
+	
+	/**
+	 * 题目：利用条件运算符的嵌套来完成此题：学习成绩>=90分的同学用A表示，60-89分之间的用B表示，
+	 */
+	public static void getGrade(double grade) throws Exception{
+		if(grade < 0 || grade >100){
+			System.out.println("成绩非法，请重新输入自己的成绩！");
+		}else{
+			try{
+				String str = (grade>=90)?"分，属于A等级":((grade>60)?"分,属于B等级":"分，属于C等级");
+				System.out.println(grade+" "+str);
+			}
+			catch(Exception ex){
+				throw ex("请输入正确的分数！");
+			}
+			finally{
+				System.out.println("输入非法！");
+			}
+		}
+		
+	}
+	private static Exception ex(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+  }
